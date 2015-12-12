@@ -8,5 +8,15 @@
 *.war
 *.ear
 
+# eclipse tmp files
+*.metadata/
+*.settings/
+*.classpath
+*.project
+*nb-configuration.xml
+*/bin/
+*/target/
+*/deploy/
+
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
