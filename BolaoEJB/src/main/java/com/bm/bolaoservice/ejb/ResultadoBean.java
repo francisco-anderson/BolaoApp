@@ -1,0 +1,51 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.bm.bolaoservice.ejb;
+
+import com.bm.bolaoservice.dao.ResultadoDAO;
+import com.bm.bolaoservice.entity.Resultado;
+import java.util.List;
+import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+/**
+ *
+ * @author Anderson
+ */
+@Stateless
+public class ResultadoBean implements ResultadoRemote {
+
+    private static final long serialVersionUID = -4478206095350788909L;
+
+    @PersistenceContext(unitName = "persistencia")
+    private EntityManager em;
+
+    @Override
+    public Resultado buscarPorId(Long idEquipe, Long idPartida) {
+        ResultadoDAO dao = new ResultadoDAO(em);
+        return dao.buscarPorPartidaEquipe(idPartida, idEquipe);
+    }
+
+    @Override
+    public List<Resultado> buscarPorEquipe(Long id) {
+        ResultadoDAO dao = new ResultadoDAO(em);
+        return dao.buscarPorEquipe(id);
+    }
+
+    @Override
+    public List<Resultado> buscarPorPartida(Long id) {
+        ResultadoDAO dao = new ResultadoDAO(em);
+        return dao.buscarPorPartida(id);
+    }
+
+    @Override
+    public Resultado salvar(Resultado equipePartida) {
+        ResultadoDAO dao = new ResultadoDAO(em);
+        return dao.save(equipePartida);
+    }
+
+}

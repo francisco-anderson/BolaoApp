@@ -1,0 +1,56 @@
+<project default="copying WAR">
+
+	<!-- copying WSDL and SCHEMAs files -->
+<!--
+	<target name="delete WSDL and SCHEMAs files">
+		<delete dir="${outputDir}/wsdl" failonerror="off" />
+	</target>
+-->
+
+<!--
+	<target name="copying WSDL and SCHEMAs files" depends="delete WSDL and SCHEMAs files">
+		<echo message="copying WSDL and SCHEMAs files: ${baseDir}/target/wsdl" />
+		<mkdir dir="${outputDir}/wsdl" />
+		<copy todir="${outputDir}/wsdl/" overwrite="true">
+			<fileset dir="${baseDir}/target/wsdl">
+				<include name="ConciliacaoWS*" />
+			</fileset>
+		</copy>
+	</target>
+	-->
+	<!-- copying WSDL and SCHEMAs files -->
+
+	<!-- copying WAR -->
+	<target name="copying WAR" depends="create deployment folder">
+		<echo message="copying files from: ${baseDir}/target/" />
+		<copy todir="${outputDir}" overwrite="true">
+			<fileset dir="${basedir}/target/">
+				<include name="*.war" />
+			</fileset>
+		</copy>
+		<!--
+		<copy todir="${outputDir}/concilie-web-config/" overwrite="true">
+			<fileset dir="${basedir}/src/main/config/">
+			    <include name="*.*" />
+			</fileset>			
+		</copy>
+		-->
+	</target>
+	
+	<!-- copying WAR -->
+
+
+
+	<target name="create deployment folder" depends="delete deployments">
+		<mkdir dir="${outputDir}" />		
+	</target>
+	
+	<target name="delete deployments">
+		<delete dir="${outputDir}" failonerror="off" />
+	</target>
+
+	<!--
+	<target name="moveToDeployFolder" depends="copying WAR,copying WSDL and SCHEMAs files">
+	</target>
+	-->
+</project>

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.bm</groupId>
+		<artifactId>BolaoApp</artifactId>
+		<version>${project.version}</version>
+	</parent>
+	
+	<properties>
+		<warName>bolaoApp</warName>	
+	</properties>
+
+	<artifactId>BolaoWebService</artifactId>
+	<packaging>war</packaging>
+
+	<name>BolaoWebService</name>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>com.bm</groupId>
+			<artifactId>BolaoEJB</artifactId>
+			<version>${project.version}</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax</groupId>
+			<artifactId>javaee-api</artifactId>
+		</dependency>
+
+	</dependencies>
+
+
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>				
+					<source>1.7</source>
+					<target>1.7</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.3</version>
+				<configuration>
+					<warName>${warName}</warName>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>2.6</version>
+				<executions>
+					<execution>
+						<phase>validate</phase>
+						<goals>
+							<goal>copy</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${endorsed.dir}</outputDirectory>
+							<silent>true</silent>
+							<artifactItems>
+								<artifactItem>
+									<groupId>javax</groupId>
+									<artifactId>javaee-endorsed-api</artifactId>
+									<version>7.0</version>
+									<type>jar</type>
+								</artifactItem>
+							</artifactItems>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			
+				<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>Writing build.properties</id>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<target>
+								<!-- Safety -->
+								<mkdir
+									dir="${project.build.directory}/${project.artifactId}-${project.version}/WEB-INF/classes/" />
+								<tstamp>
+									<format property="build.time" pattern="yyyy-MM-dd HH:mm:ss" />
+								</tstamp>
+								<echo
+									file="${project.build.directory}/${project.artifactId}-${project.version}/WEB-INF/classes/build.properties">
+									<![CDATA[
+										buildNr=${changeSet}
+										buildTime=${build.time}
+									]]>
+								</echo>
+							</target>
+						</configuration>
+					</execution>
+					<execution>
+						<id>Moving to deploy folder</id>
+						<phase>package</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<skip>${dontMoveToDeployFolder}</skip>
+							<target>
+								<property name="compile_classpath" refid="maven.compile.classpath" />
+								<property name="baseDir" value="${basedir}" />
+								<property name="outputDir" value="${basedir}/../deploy" />
+								<property name="module_version" value="${module.version}" />
+								<ant antfile="${basedir}/src/main/ant/build.xml" target="copying WAR" />
+							</target>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			
+			
+		</plugins>
+	</build>
+
+</project>
