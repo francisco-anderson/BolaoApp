@@ -5,7 +5,7 @@
  */
 package com.bm.bolaowebservice;
 
-import com.bm.bolaoservice.ejb.EquipeRemote;
+import com.bm.bolaoservice.ejb.remote.EquipeRemote;
 import com.bm.bolaoservice.entity.Equipe;
 import com.bm.bolaoservice.entity.Usuario;
 import java.util.List;

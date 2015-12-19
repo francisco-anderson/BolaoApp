@@ -5,7 +5,7 @@
  */
 package com.bm.bolaowebservice;
 
-import com.bm.bolaoservice.ejb.CampeonatoRemote;
+import com.bm.bolaoservice.ejb.remote.CampeonatoRemote;
 import com.bm.bolaoservice.entity.Campeonato;
 import com.bm.bolaoservice.entity.Usuario;
 import java.util.Date;

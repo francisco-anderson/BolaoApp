@@ -5,7 +5,7 @@
  */
 package com.bm.bolaowebservice;
 
-import com.bm.bolaoservice.ejb.UsuarioRemote;
+import com.bm.bolaoservice.ejb.remote.UsuarioRemote;
 import com.bm.bolaoservice.entity.Usuario;
 import javax.ejb.EJB;
 import javax.ws.rs.Consumes;

@@ -5,7 +5,7 @@
  */
 package com.bm.bolaowebservice;
 
-import com.bm.bolaoservice.ejb.PontuacaoUsuarioRemote;
+import com.bm.bolaoservice.ejb.remote.PontuacaoUsuarioRemote;
 import com.bm.bolaoservice.entity.PontuacaoUsuario;
 import com.bm.bolaoservice.entity.Usuario;
 import java.util.List;

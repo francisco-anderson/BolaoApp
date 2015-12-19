@@ -5,7 +5,7 @@
  */
 package com.bm.bolaowebservice;
 
-import com.bm.bolaoservice.ejb.PartidaRemote;
+import com.bm.bolaoservice.ejb.remote.PartidaRemote;
 import com.bm.bolaoservice.entity.Partida;
 import java.util.List;
 import javax.ejb.EJB;
